@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stoic Reset</title>
+<meta name="description" content="Short Stoic lessons from Marcus Aurelius, Seneca and Epictetus, with every quote sourced.">
+<meta property="og:title" content="Stoic Reset">
+<meta property="og:description" content="Short Stoic lessons from Marcus Aurelius, Seneca and Epictetus, with every quote sourced.">
+<meta property="og:image" content="https://stoicreset.github.io/apple-touch-icon.png">
+<meta name="theme-color" content="#1b2433">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="bio">
+<div class="wrap">
+  <img class="mark" src="apple-touch-icon.png" alt="Stoic Reset: a temple silhouette against a rising sun" width="112" height="112">
+  <h1>Stoic Reset</h1>
+  <p class="tag">Old wisdom for a loud world. Marcus Aurelius, Seneca and Epictetus in under a minute, every quote sourced.</p>
+  <!-- Links: fill in the real profile addresses before publishing. A link with an empty data-href is hidden. -->
+  <ul class="links" id="links">
+    <li><a data-href="" href="#">Watch on TikTok</a></li>
+    <li><a data-href="" href="#">Follow on Instagram</a></li>
+  </ul>
+  <p class="note">Videos feature an AI avatar of Yasmin, made with her permission and labelled as AI on every post.</p>
+</div>
+<footer><a href="terms">Terms</a> · <a href="privacy">Privacy</a></footer>
+<script>
+  document.querySelectorAll('#links a').forEach(function (a) {
+    var h = a.getAttribute('data-href');
+    if (h) { a.href = h; a.rel = 'noopener'; } else { a.parentElement.hidden = true; }
+  });
+</script>
+</body>
+</html>

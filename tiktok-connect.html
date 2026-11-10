@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<title>Connecting TikTok · Stoic Reset Studio</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="handoff">
+  <div>
+    <h1 id="t">Connecting TikTok…</h1>
+    <p id="m">Handing you back to Stoic Reset Studio.</p>
+  </div>
+</main>
+<script>
+/*
+  TikTok sends the account owner here after "Log in with TikTok", with ?code=…&state=…
+  This public page holds no secrets and talks to no server. The private Stoa address travels inside `state`
+  (set by Stoa itself when sign-in starts), so it never appears on this public site. The page only forwards the
+  owner's own browser to that address, and only if it is HTTPS on a private Tailscale (.ts.net) name, which
+  works only from her own devices. The one-time code expires within minutes.
+*/
+(function () {
+  var q = new URLSearchParams(location.search);
+  var say = function (t, m) { document.getElementById('t').textContent = t; document.getElementById('m').textContent = m; };
+  if (q.get('error')) { say('Sign-in was cancelled', 'TikTok said: ' + (q.get('error_description') || q.get('error')) + '. You can close this page and try again from Stoa.'); return; }
+  var code = q.get('code'), state = q.get('state') || '';
+  var part = state.split('.')[1];
+  var target = null;
+  try {
+    var b64 = part.replace(/-/g, '+').replace(/_/g, '/');
+    var u = new URL(JSON.parse(atob(b64 + '==='.slice((b64.length + 3) % 4))).u);
+    if (u.protocol === 'https:' && /\.ts\.net$/.test(u.hostname) && u.pathname === '/connect/tiktok/callback') target = u;
+  } catch (e) { target = null; }
+  if (!code || !target) { say('Nothing to connect here', 'This page finishes signing in to Stoic Reset Studio. It only works when you start from Stoa on your own device.'); return; }
+  target.search = new URLSearchParams({ code: code, state: state, scopes: q.get('scopes') || '' }).toString();
+  history.replaceState(null, '', location.pathname);  // drop the code from this page's address and history
+  location.replace(target.toString());
+})();
+</script>
+</body>
+</html>
